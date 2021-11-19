@@ -29,6 +29,7 @@ io.on('connection', (socket) => {
 
 
     socket.on('message', function (msg) {
+        console.log(msg);
         io.sockets.emit('messageToClients', msg, UserName); // sending event 'messageToClients' to another users with params
     });
 
