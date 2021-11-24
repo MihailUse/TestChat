@@ -2,22 +2,18 @@ import { DataTypes, Model, Optional } from 'sequelize'
 import sequelizeDB from '../sequelize'
 
 
-interface RoomAttributes {
+interface PermissionAttributes {
     id: number;
-    description: string;
-    createdAt?: Date;
-    updatedAt?: Date;
-    deletedAt?: Date;
+    name: string;
 }
 
+export interface PermissionInput extends Optional<PermissionAttributes, 'id'> { }
+export interface PermissionOuput extends Required<PermissionAttributes> { }
 
-export interface RoomInput extends Optional<RoomAttributes, 'id'> { }
-export interface RoomOuput extends Required<RoomAttributes> { }
 
-
-export class Room extends Model<RoomAttributes, RoomInput> implements RoomAttributes {
+export class Permission extends Model<PermissionAttributes, PermissionInput> implements PermissionAttributes {
     id: number;
-    description: string;
+    name: string;
 
     // timestamps
     public readonly createdAt: Date;
@@ -25,17 +21,16 @@ export class Room extends Model<RoomAttributes, RoomInput> implements RoomAttrib
     public readonly deletedAt: Date;
 }
 
-
-Room.init({
+Permission.init({
     id: {
         type: DataTypes.BIGINT,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false
     },
-    description: {
-        type: DataTypes.TEXT
-    }
+    name: {
+        type: DataTypes.TEXT,
+    },
 },
     {
         sequelize: sequelizeDB,
@@ -43,3 +38,4 @@ Room.init({
         paranoid: true
     }
 );
+

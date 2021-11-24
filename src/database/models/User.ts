@@ -4,8 +4,8 @@ import sequelizeDB from '../sequelize'
 
 interface UserAttributes {
     id: number;
-    name: string;
-    description?: string;
+    login: string;
+    password: string;
     createdAt?: Date;
     updatedAt?: Date;
     deletedAt?: Date;
@@ -22,14 +22,15 @@ export interface UserOuput extends Required<UserAttributes> { }
 
 export class User extends Model<UserAttributes, UserInput> implements UserAttributes {
     id: number;
-    name: string;
-    description: string;
+    login: string;
+    password: string;
 
     // timestamps
     public readonly createdAt: Date;
     public readonly updatedAt: Date;
     public readonly deletedAt: Date;
 }
+
 
 User.init({
     id: {
@@ -38,11 +39,11 @@ User.init({
         primaryKey: true,
         allowNull: false
     },
-    name: {
+    login: {
         type: DataTypes.TEXT,
         allowNull: false
     },
-    description: {
+    password: {
         type: DataTypes.TEXT
     }
 },
